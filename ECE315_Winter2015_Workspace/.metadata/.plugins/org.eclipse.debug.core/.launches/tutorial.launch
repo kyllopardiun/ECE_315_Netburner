@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="nbeclipse.core.launch.nbconfig">
-<stringAttribute key="ATTR_IP" value="192.168.1.2"/>
+<stringAttribute key="ATTR_IP" value=""/>
 <booleanAttribute key="org.eclipse.cdt.debug.mi.core.AUTO_SOLIB" value="false"/>
 <stringAttribute key="org.eclipse.cdt.debug.mi.core.DEBUG_NAME" value="m68k-elf-gdb"/>
 <stringAttribute key="org.eclipse.cdt.debug.mi.core.DEV" value="COM1"/>
 <stringAttribute key="org.eclipse.cdt.debug.mi.core.GDB_INIT" value=""/>
-<stringAttribute key="org.eclipse.cdt.debug.mi.core.HOST" value="192.168.1.2"/>
 <stringAttribute key="org.eclipse.cdt.debug.mi.core.PORT" value="2159"/>
 <booleanAttribute key="org.eclipse.cdt.debug.mi.core.REMOTE_TCP" value="true"/>
 <stringAttribute key="org.eclipse.cdt.debug.mi.core.protocol" value="mi"/>
