@@ -50,6 +50,8 @@ void UserMain(void * pd) {
     InitializeNetworkGDB_and_Wait();
     #endif
 
+    IRQIntInit();
+
     iprintf("Application started: %s\n", AppName);
 
     myKeypad.Init();
@@ -82,12 +84,12 @@ void UserMain(void * pd) {
 void Print_Task(void * pd) {
 	myLCD.PrintString(LCD_UPPER_SCR, "it works");
 	iprintf("worrrrks");
-	while (1) {
+	//while (1) {
 		OSSemPend(&print_sem, 0);
 
 		myLCD.PrintString(LCD_UPPER_SCR, "no");
 		iprintf("dammmmmit");
-	}
+	//}
 }
 
 /* The INTERRUPT MACRO handles the house keeping for the vector table
@@ -100,7 +102,7 @@ void Print_Task(void * pd) {
  * are listed there as well */
 
 INTERRUPT(out_irq_pin_isr, 0x2500){
-	sim.eport.epfr=0x8; /* Clear the interrupt edge 0 0 0 0 1 0 0 0 */
+	sim.eport.epfr=0x08; /* Clear the interrupt edge 0 0 0 0 1 0 0 0 */
 
 
 	OSSemPost(&print_sem);
@@ -108,8 +110,8 @@ INTERRUPT(out_irq_pin_isr, 0x2500){
 /* The 8-bit interrupt vector is formed using the following algorithm:
 * For Interrupt Controller 0, vector_number = 64 + interrupt source number (3)
 */
-#define INTERRUPT_VECTOR (67)
-#define INTERRUPT_CONTROLLER (0)
+#define INTERRUPT_VECTOR (3)
+#define INTERRUPT_CONTROLLER_0 (0)
 #define ISR_MASK_1 (1)
 #define ISR_PRIO_1 (1)
 
@@ -139,5 +141,9 @@ void IRQIntInit(void) {
 	sim.eport.epier = 0x8; /* Enable IRQ3 only 0 0 0 0 1 0 0 0 */
 
 	// Register ISR with interrupt controller.
-	SetIntc(INTERRUPT_CONTROLLER, (long)&out_irq_pin_isr, INTERRUPT_VECTOR, ISR_MASK_1, ISR_PRIO_1);
+	SetIntc(INTERRUPT_CONTROLLER_0,
+			(long)&out_irq_pin_isr,
+			INTERRUPT_VECTOR,
+			ISR_MASK_1,
+			ISR_PRIO_1);
 }

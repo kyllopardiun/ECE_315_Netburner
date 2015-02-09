@@ -1,0 +1,137 @@
+///////////////////////////////////////////////////////////////////////
+// This program demonstrates the use of interrupts via IRQ1 of the //
+// edge port module. For this program to properly work, the MOD5234 //
+// should be mounted on a MOD-DEV-100 carrier board; this program //
+// utilizes the IRQ button (found next to the reset button). //
+// //
+// As the user presses the IRQ button, the transition to active low //
+// triggers an interrupt, invoking the interrupt service routine as //
+// a result, since the program configures IRQ1 for falling-edge //
+// sensitivity. At the beginning of each loop, the program waits //
+// for the semaphore to be posted/available before continuing on. //
+// When the ISR is called, the interrupt is cleared followed by the //
+// posting of the semaphore, in turn allowing the rest of the //
+// program code in the WHILE loop to execute before waiting for the //
+// semaphore again in the next loop. //
+// //
+// Activity of the interrupts triggering and the ISR being called //
+// are shown to the user in MTTTY via the debug monitor serial port. //
+///////////////////////////////////////////////////////////////////////
+#include "predef.h"
+#include <stdio.h>
+#include <ctype.h>
+#include <startnet.h>
+#include <autoupdate.h>
+#include <dhcpclient.h>
+#include <sim5234.h>
+#include <cfinter.h>
+//
+// An interrupt setup helper defined in bsp.c
+//
+extern "C" {
+// This function sets up the MCF5234 interrupt controller
+void SetIntc(int intc, long func, int vector, int level, int prio);
+void UserMain(void* pd);
+void putdisp(unsigned short w);
+}
+OS_SEM IrqPostSem; // We are going to use a semaphore to communicate
+// between the IRQ1 pin ISR and the main
+// application
+///////////////////////////////////////////////////////////////////////
+// INTERRUPT() - Declare our interrupt procedure
+//
+// Name:
+// out_irq1_pin_isr
+// Masking level (the value of the ColdFire SR during the interrupt):
+// Use 0x2700 to mask all interrupts
+// 0x2600 to mask levels 1-6
+// 0x2500 to mask levels 1-5
+// ...
+// 0x2100 to mask level 1
+//
+INTERRUPT( out_irq1_pin_isr, 0x2100 )
+{
+	//
+	// WARNING - Only a very limited set of RTOS functions can be called
+	// from within an interrupt service routine. Basically, only OS
+	// POST functions and LED functions should be used - no I/O (e.g.,
+	// read(), write(), or printf()), since they can block.
+	//
+	sim.eport.epfr = 0x02; // 0000 0010 - Clear the interrupt edge
+	OSSemPost(&IrqPostSem);
+}
+INTERRUPT( out_irq3_pin_isr, 0x2500 )
+{
+	//
+	// WARNING - Only a very limited set of RTOS functions can be called
+	// from within an interrupt service routine. Basically, only OS
+	// POST functions and LED functions should be used - no I/O (e.g.,
+	// read(), write(), or printf()), since they can block.
+	//
+	sim.eport.epfr = 0x08; // 0000 1000 - Clear the interrupt edge
+	OSSemPost(&IrqPostSem);
+}
+///////////////////////////////////////////////////////////////////////
+// PutDispDecimal() - Helper function to display a decimal number
+//
+void PutDispDecimal(WORD val, BOOL blank_zero) {
+	WORD w;
+	w = (val / 1000) * 0x1000;
+	if ((w == 0) && blank_zero)
+		w = 0xF000;
+	w += ((val / 100) % 10) * 0x0100;
+	if (w == 0xF000)
+		w = 0xFF00;
+	w += ((val / 10) % 10) * 0x0010;
+	if (w == 0xFF00)
+		w = 0xFFF0;
+	w += (val % 10) * 0x0001;
+	putdisp(w);
+}
+///////////////////////////////////////////////////////////////////////
+// UserMain() - Main task
+//
+void UserMain(void* pd) {
+	InitializeStack();
+	if (EthernetIP == 0)
+		GetDHCPAddress();
+	OSChangePrio(MAIN_PRIO);
+	EnableAutoUpdate();
+	DWORD isr_count = 0; // Count how many times the switch
+	// was hit
+	OSSemInit(&IrqPostSem, 0); // Initialize the semaphore we are
+	// using
+	//
+	// First set up the edge port module to use IRQ1 as a falling-edge
+	// sensitive IRQ pin (see the MCF5235 Reference Manual Section
+	// 15.4.1.1).
+	//
+	//sim.eport.eppar = 0x0008; // 0000 0000 0000 1000 - See Table
+	sim.eport.eppar = 0x0048; //   0000 0000 01 00 10 00 - See Table
+	// 15-3 in the MCF5235 Ref Man
+	sim.eport.epddr = 0x00; // 0000 0000 - All edge port pins as
+	// inputs
+	sim.eport.epier = 0x0A; // 0000 1010 - Enable IRQ1 only
+	//
+	// Now enable the actual interrupt controller. We are going to use
+	// the BSP helper function declared above and defined in
+	// \Nburn\MOD5234\system\bsp.c
+	//
+	SetIntc(0, // The intc number
+			(long) &out_irq1_pin_isr, // Our interrupt function
+			1, // Interrupt source vector
+			1, // Interrupt level
+			1); // Interrupt priority
+	SetIntc(0, // The intc number
+				(long) &out_irq3_pin_isr, // Our interrupt function
+				3, // Interrupt source vector
+				2, // Interrupt level
+				2); // Interrupt priority
+	iprintf("Application started\r\n");
+	iprintf("Press the IRQ button on the development board\r\n");
+	while (1) {
+		OSSemPend(&IrqPostSem, 0 /* Wait forever */);
+		PutDispDecimal(++isr_count, true);
+		iprintf("The interrupt switch was hit %ld times\r\n", isr_count);
+	}
+}
