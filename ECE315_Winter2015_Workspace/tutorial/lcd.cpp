@@ -279,7 +279,7 @@ Lcd::Lcd()
 void Lcd::setLCD(unsigned char screen){
 	send_cmd(screen, CMD_FUNCTION | FUNCTION_8BIT | FUNCTION_2LINE | FUNCTION_5x10);
 	send_cmd(screen, CMD_CLEAR);
-	send_cmd(screen, CMD_DISPLAY | DISPLAY_ON | DISPLAY_NOCURSOR | DISPLAY_BLINK);
+	send_cmd(screen, CMD_DISPLAY | DISPLAY_ON | DISPLAY_NOCURSOR | DISPLAY_NOBLINK);
 	send_cmd(screen, CMD_ENTRY_MODE | ENTRY_CURSOR_INC | ENTRY_NOSHIFT);
 	send_cmd(screen, CMD_SHIFT | SHIFT_CURSOR | SHIFT_RIGHT);
 	send_cmd(screen, CMD_HOME);

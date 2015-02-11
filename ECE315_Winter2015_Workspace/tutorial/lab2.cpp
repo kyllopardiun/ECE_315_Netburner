@@ -14,23 +14,26 @@
 
 extern "C" {
 void UserMain(void * pd);
-void Print_Task(void * pd);
+void changePosition(char * message, unsigned char *currentScreen, unsigned char *currentPosition);
+void toggleScreen(unsigned char *currentScreen);
 void IRQIntInit(void);
 void SetIntc(int intc, long func, int vector, int level, int prio);
 }
-
-
-#define PRINT_TASK_PRIO 	(MAIN_PRIO + 1)
 
 const char * AppName="Rodrigo & Kirby";
 
 /* Instantiate your Queue objects here */
 
-OS_SEM print_sem;
-DWORD Print_Task_Stack[USER_TASK_STK_SIZE] __attribute__( ( aligned( 4 ) ) );
+#define QSIZE (50)
+
+OS_Q print_q;
+void * QStorage[QSIZE];
 
 Keypad  myKeypad;
 Lcd		myLCD;
+
+/* Cursor tracking state */
+const char cursor = '*';
 
 
 void UserMain(void * pd) {
@@ -50,46 +53,89 @@ void UserMain(void * pd) {
     InitializeNetworkGDB_and_Wait();
     #endif
 
-    IRQIntInit();
-
     iprintf("Application started: %s\n", AppName);
 
     myKeypad.Init();
     myLCD.Init(LCD_BOTH_SCR);
-    myLCD.PrintString(LCD_UPPER_SCR, "ECE315 Lab #2 Winter 2015");
     OSTimeDly(TICKS_PER_SECOND*1);
 
+    IRQIntInit();
 
     /* Initialize your queue and interrupt here */
-    OSSemInit(&print_sem, 0);
-    err = OS_NO_ERR;
+    OSQInit(&print_q, QStorage, QSIZE);
 
-	err = display_error("Start Print Task: ", OSTaskCreatewName(Print_Task,
-			(void *) NULL, // task data - not usually used
-			(void *) &Print_Task_Stack[USER_TASK_STK_SIZE], // task stack top
-			(void *) &Print_Task_Stack[0], // task stack bottom
-			PRINT_TASK_PRIO, "Print Task") // task priority and task name
-			);
+	unsigned char currentScreen = LCD_UPPER_SCR;
+	unsigned char currentPosition = 50;
 
-    while (1) {
+    while (TRUE) {
     	/* Insert your queue usage stuff */
     	/* You may also choose to do a quick poll of the Data Avail line
     	 * of the encoder to convince yourself that the keypad encoder works.
     	 */
+    	myLCD.Clear(LCD_BOTH_SCR);
+    	myLCD.MoveCursor(currentScreen, currentPosition);
+    	myLCD.PrintChar(currentScreen, cursor);
 
-    	OSTimeDly(TICKS_PER_SECOND*100);
+    	char * message = (char *) OSQPend(&print_q, WAIT_FOREVER, &err);
+
+    	/* Decode message and change screen and position. */
+    	changePosition(message, &currentScreen, &currentPosition);
+
+    	OSTimeDly(TICKS_PER_SECOND / 10);
     }
 }
 
-void Print_Task(void * pd) {
-	myLCD.PrintString(LCD_UPPER_SCR, "it works");
-	iprintf("worrrrks");
-	//while (1) {
-		OSSemPend(&print_sem, 0);
+void changePosition(char * message, unsigned char *currentScreen, unsigned char *currentPosition) {
+	switch (message[0])
+	{
+	case 'L':
+		iprintf("L");
+		if (*currentPosition == 0) {
+			toggleScreen(currentScreen);
+			*currentPosition = 79;
+		} else {
+			(*currentPosition)--;
+		}
+	break;
+	case 'R':
+		iprintf("R");
+		if (*currentPosition == 79) {
+			toggleScreen(currentScreen);
+			*currentPosition = 0;
+		} else {
+			(*currentPosition)++;
+		}
+	break;
+	case 'U':
+		iprintf("U");
+		if (*currentPosition >= 40) {
+			/* currently on bottom line of current screen */
+			*currentPosition -= 40 ;
+		} else {
+			/* currently on top line of current screen */
+			toggleScreen(currentScreen);
+			*currentPosition += 40;
+		}
+	break;
+	case 'D':
+		iprintf("D");
+		if (*currentPosition >= 40) {
+			/* currently on bottom line of current screen */
+			toggleScreen(currentScreen);
+			*currentPosition -= 40;
+		} else {
+			/* currently on top line of current screen */
+			*currentPosition += 40;
+		}
+	break;
+	}
 
-		myLCD.PrintString(LCD_UPPER_SCR, "no");
-		iprintf("dammmmmit");
-	//}
+	iprintf("_%d", *currentPosition);
+}
+
+void toggleScreen(unsigned char *currentScreen) {
+	if (*currentScreen == LCD_UPPER_SCR) *currentScreen = LCD_LOWER_SCR;
+	else *currentScreen = LCD_UPPER_SCR;
 }
 
 /* The INTERRUPT MACRO handles the house keeping for the vector table
@@ -104,8 +150,7 @@ void Print_Task(void * pd) {
 INTERRUPT(out_irq_pin_isr, 0x2500){
 	sim.eport.epfr=0x08; /* Clear the interrupt edge 0 0 0 0 1 0 0 0 */
 
-
-	OSSemPost(&print_sem);
+	OSQPost(&print_q, (void *) myKeypad.GetNewButtonString());
 }
 /* The 8-bit interrupt vector is formed using the following algorithm:
 * For Interrupt Controller 0, vector_number = 64 + interrupt source number (3)

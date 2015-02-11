@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="18" version="2.0">
+<workbench progressCount="14" version="2.0">
 <workbenchAdvisor/>
 <window height="768" maximized="true" width="1024" x="125" y="92">
 <fastViewData fastViewLocation="1024"/>
@@ -29,23 +29,13 @@
 <folder appearance="1" expanded="2">
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
-<part id="1"/>
-<part id="2"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="lab2.cpp" partName="lab2.cpp" path="D:/ECE_315_Netburner-master/ECE315_Winter2015_Workspace/tutorial/lab2.cpp" title="lab2.cpp" tooltip="tutorial/lab2.cpp" workbook="DefaultEditorWorkbook">
+<editor focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="lab2.cpp" partName="lab2.cpp" path="C:/Users/kdbanman/Desktop/ECE_315_Netburner/ECE315_Winter2015_Workspace/tutorial/lab2.cpp" title="lab2.cpp" tooltip="tutorial/lab2.cpp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/tutorial/lab2.cpp"/>
-<editorState selectionLength="0" selectionOffset="588"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="keypad.h" partName="keypad.h" path="D:/ECE_315_Netburner-master/ECE315_Winter2015_Workspace/tutorial/keypad.h" title="keypad.h" tooltip="tutorial/keypad.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/tutorial/keypad.h"/>
-<editorState selectionLength="0" selectionOffset="332"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="lcd.cpp" partName="lcd.cpp" path="D:/ECE_315_Netburner-master/ECE315_Winter2015_Workspace/tutorial/lcd.cpp" title="lcd.cpp" tooltip="tutorial/lcd.cpp" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/tutorial/lcd.cpp"/>
-<editorState selectionLength="0" selectionOffset="13931"/>
+<editorState selectionLength="0" selectionOffset="3995"/>
 </editor>
 </editors>
 <views>
@@ -55,7 +45,9 @@
 <view id="nbeclipse.tools.nb.nbfind" partName="NBFind">
 <viewState/>
 </view>
-<view id="nbeclipse.tools.nb.nbconfig" partName="NBConfig"/>
+<view id="nbeclipse.tools.nb.nbconfig" partName="NBConfig">
+<viewState/>
+</view>
 <view id="org.eclipse.search.ui.views.SearchView" partName="Search">
 <viewState isPinned="false">
 <view IMemento.internal.id="" org.eclipse.search.lastActivation="0"/>
@@ -64,8 +56,8 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
+<category IMemento.internal.id="Warnings"/>
 <category IMemento.internal.id="Errors"/>
-<category IMemento.internal.id="Errors (3 items)"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="0" org.eclipse.ui.ide.markerType="0" org.eclipse.ui.ide.pathField="0" org.eclipse.ui.ide.resourceField="0" org.eclipse.ui.ide.severityAndDescriptionField="0"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -83,7 +75,7 @@
 <viewState/>
 </view>
 </views>
-<perspectives activePart="org.eclipse.cdt.ui.editor.CEditor" activePerspective="nbeclipse.core.perspective.netburner">
+<perspectives activePart="nbeclipse.tools.nb.nbfind" activePerspective="nbeclipse.core.perspective.netburner">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="nbeclipse.core.perspective.NBPerspectiveFactory" id="nbeclipse.core.perspective.netburner" label="NetBurner"/>
 <alwaysOnActionSet id="nbeclipse.core.actions.nb"/>
@@ -177,139 +169,160 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.binaryEditor" path="/tutorial/Release/tutorial.elf"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/tutorial/lab1.cpp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/tutorial/error_wrapper.cpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/tutorial/lab2.cpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/tutorial/keypad.cpp"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/tutorial/lcd.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/tutorial/lcd.cpp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/tutorial/lab2.cpp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/tutorial/keypad.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/tutorial/lcd.cpp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/tutorial/keypad.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/tutorial/lcd.cpp"/>
 </editors>
-<item historyLabel="tutorial.elf" index="0">
+<item historyLabel="lab2.cpp" index="0">
 <position/>
 </item>
-<item historyLabel="lab1.cpp" index="1">
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="2410" y="18"/>
+</item>
+<item historyLabel="keypad.cpp" index="1">
 <position/>
 </item>
-<item historyLabel="error_wrapper.cpp" index="2">
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="1236" y="0"/>
+</item>
+<item historyLabel="lcd.h" index="2">
 <position/>
 </item>
-<item historyLabel="lab1.cpp" index="1">
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="816" y="0"/>
+</item>
+<item historyLabel="lcd.h" index="2">
+<position info="not_deleted" x="5413" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="816" y="0"/>
+</item>
+<item historyLabel="lcd.h" index="2">
+<position info="not_deleted" x="5413" y="0"/>
+</item>
+<item historyLabel="keypad.cpp" index="1">
 <position/>
 </item>
-<item historyLabel="lcd.h" index="3">
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="816" y="0"/>
+</item>
+<item historyLabel="lcd.h" index="2">
+<position info="not_deleted" x="5638" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="816" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="1831" y="0"/>
+</item>
+<item historyLabel="lcd.h" index="2">
+<position info="not_deleted" x="5638" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="2032" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="1831" y="0"/>
+</item>
+<item historyLabel="lcd.h" index="2">
+<position info="not_deleted" x="6048" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="2079" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="2028" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="3329" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="2206" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="2205" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
 <position/>
 </item>
-<item historyLabel="lab1.cpp" index="1">
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="477" y="0"/>
+</item>
+<item historyLabel="lcd.h" index="2">
+<position info="not_deleted" x="5649" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="618" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="2616" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="3213" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="3326" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="2794" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="475" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="2984" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
 <position/>
 </item>
-<item historyLabel="lcd.cpp" index="4">
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="2344" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="2303" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="3139" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="3099" y="0"/>
+</item>
+<item historyLabel="lcd.h" index="2">
+<position info="not_deleted" x="5118" y="0"/>
+</item>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="3104" y="0"/>
+</item>
+<item historyLabel="lcd.h" index="2">
+<position info="not_deleted" x="5041" y="0"/>
+</item>
+<item historyLabel="lcd.cpp" index="3">
 <position/>
 </item>
-<item historyLabel="lcd.h" index="3">
+<item historyLabel="lcd.h" index="2">
+<position info="not_deleted" x="2594" y="5"/>
+</item>
+<item historyLabel="lcd.cpp" index="3">
 <position/>
 </item>
-<item historyLabel="lcd.cpp" index="4">
-<position info="not_deleted" x="7542" y="0"/>
+<item historyLabel="lcd.h" index="2">
+<position info="not_deleted" x="2594" y="5"/>
 </item>
-<item historyLabel="lcd.h" index="3">
-<position info="not_deleted" x="4573" y="0"/>
-</item>
-<item historyLabel="lcd.cpp" index="4">
-<position info="not_deleted" x="7542" y="0"/>
-</item>
-<item historyLabel="lab1.cpp" index="1">
+<item historyLabel="lab2.cpp" index="0">
 <position/>
 </item>
-<item historyLabel="error_wrapper.cpp" index="2">
+<item historyLabel="keypad.cpp" index="1">
 <position/>
 </item>
-<item historyLabel="lab1.cpp" index="1">
-<position/>
+<item historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="3950" y="0"/>
 </item>
-<item historyLabel="lcd.cpp" index="4">
-<position info="not_deleted" x="7542" y="0"/>
+<item historyLabel="keypad.cpp" index="1">
+<position info="not_deleted" x="3343" y="0"/>
 </item>
-<item historyLabel="lcd.h" index="3">
-<position info="not_deleted" x="4573" y="0"/>
-</item>
-<item historyLabel="lab1.cpp" index="1">
-<position/>
-</item>
-<item historyLabel="lab1.cpp" index="1">
-<position/>
-</item>
-<item historyLabel="lab2.cpp" index="5">
-<position/>
-</item>
-<item historyLabel="keypad.h" index="6">
-<position/>
-</item>
-<item historyLabel="lab2.cpp" index="5">
-<position info="not_deleted" x="1931" y="0"/>
-</item>
-<item historyLabel="keypad.h" index="6">
-<position/>
-</item>
-<item historyLabel="lab2.cpp" index="5">
-<position info="not_deleted" x="1931" y="0"/>
-</item>
-<item historyLabel="lab2.cpp" index="5">
-<position info="not_deleted" x="2282" y="0"/>
-</item>
-<item historyLabel="lab2.cpp" index="5">
-<position info="not_deleted" x="2330" y="0"/>
-</item>
-<item historyLabel="lab2.cpp" index="5">
-<position info="not_deleted" x="2306" y="0"/>
-</item>
-<item historyLabel="lcd.cpp" index="7">
-<position/>
-</item>
-<item historyLabel="keypad.h" index="8">
-<position info="not_deleted" x="332" y="0"/>
-</item>
-<item historyLabel="lab2.cpp" index="5">
-<position info="not_deleted" x="2080" y="0"/>
-</item>
-<item historyLabel="lcd.cpp" index="7">
-<position/>
-</item>
-<item historyLabel="keypad.h" index="8">
-<position info="not_deleted" x="332" y="0"/>
-</item>
-<item historyLabel="lab2.cpp" index="5">
-<position info="not_deleted" x="2080" y="0"/>
-</item>
-<item historyLabel="lab2.cpp" index="5">
-<position info="not_deleted" x="583" y="21"/>
-</item>
-<item historyLabel="lab2.cpp" index="5">
-<position info="not_deleted" x="2080" y="0"/>
-</item>
-<item historyLabel="lcd.cpp" index="9">
-<position info="not_deleted" x="4614" y="40"/>
-</item>
-<item historyLabel="lab2.cpp" index="5">
-<position info="not_deleted" x="1976" y="0"/>
-</item>
-<item historyLabel="lcd.cpp" index="9">
-<position info="not_deleted" x="13931" y="0"/>
-</item>
-<item historyLabel="lab2.cpp" index="5">
-<position info="not_deleted" x="1976" y="0"/>
-</item>
-<item historyLabel="lab2.cpp" index="5">
-<position info="not_deleted" x="2091" y="0"/>
-</item>
-<item historyLabel="lab2.cpp" index="5">
-<position info="not_deleted" x="2061" y="0"/>
-</item>
-<item active="true" historyLabel="lab2.cpp" index="5">
-<position info="not_deleted" x="1329" y="0"/>
+<item active="true" historyLabel="lab2.cpp" index="0">
+<position info="not_deleted" x="3950" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -317,6 +330,13 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
+<trimArea IMemento.internal.id="16384">
+<trimItem IMemento.internal.id="bottomLeft"/>
+<trimItem IMemento.internal.id="topLeft"/>
+</trimArea>
+<trimArea IMemento.internal.id="131072">
+<trimItem IMemento.internal.id="topRight"/>
+</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 </trimArea>
@@ -324,12 +344,19 @@
 <trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
+<trimItem IMemento.internal.id="bottomRight"/>
 </trimArea>
 </trimLayout>
 </window>
 <mruList>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="lcd.cpp" tooltip="tutorial/lcd.cpp">
 <persistable path="/tutorial/lcd.cpp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="lcd.h" tooltip="tutorial/lcd.h">
+<persistable path="/tutorial/lcd.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="keypad.cpp" tooltip="tutorial/keypad.cpp">
+<persistable path="/tutorial/keypad.cpp"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="keypad.h" tooltip="tutorial/keypad.h">
 <persistable path="/tutorial/keypad.h"/>
@@ -342,9 +369,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="error_wrapper.cpp" tooltip="tutorial/error_wrapper.cpp">
 <persistable path="/tutorial/error_wrapper.cpp"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="lcd.h" tooltip="tutorial/lcd.h">
-<persistable path="/tutorial/lcd.h"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.binaryEditor" name="tutorial.elf" tooltip="tutorial/Release/tutorial.elf">
 <persistable path="/tutorial/Release/tutorial.elf"/>
