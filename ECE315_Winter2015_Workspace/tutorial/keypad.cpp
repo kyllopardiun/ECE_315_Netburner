@@ -1,4 +1,8 @@
-/* Nancy Minderman
+/* 
+ * Modified by Kirby Banman and Rodrigo Mansueli February 2015, see comment
+ * tag "KEYPAD_MAP_2015"
+ *
+ * Nancy Minderman
 nem@ece.ualberta.ca
 October 2, 2008
 Original Code by Justin Smalley
@@ -32,7 +36,7 @@ and Nancy's keypad.
 	"L", "D", "", "U",
 	"", "", "", "",
 	"R", "", "", ""
-	};
+	}; //KEYPAD_MAP_2015
 
 /* Name:Keypad Constructor
  * Description: Constructor for the Keypad class. Not much to do beyond

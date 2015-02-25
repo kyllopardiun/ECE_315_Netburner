@@ -22,7 +22,7 @@ void SetIntc(int intc, long func, int vector, int level, int prio);
 
 const char * AppName="Rodrigo & Kirby";
 
-/* Instantiate your Queue objects here */
+/* Instantiate Queue objects */
 
 #define QSIZE (50)
 
@@ -32,7 +32,7 @@ void * QStorage[QSIZE];
 Keypad  myKeypad;
 Lcd		myLCD;
 
-/* Cursor tracking state */
+/* Cursor character */
 const char cursor = '*';
 
 
@@ -59,24 +59,28 @@ void UserMain(void * pd) {
     myLCD.Init(LCD_BOTH_SCR);
     OSTimeDly(TICKS_PER_SECOND*1);
 
+    /* Declare interrupt. */
     IRQIntInit();
 
     /* Initialize your queue and interrupt here */
-    OSQInit(&print_q, QStorage, QSIZE);
+    err = display_error ("Initialize Queue: ",
+            OSQInit(&print_q, QStorage, QSIZE)
+	);
 
-	unsigned char currentScreen = LCD_UPPER_SCR;
-	unsigned char currentPosition = 50;
+    /* cursor tracking state */
+    unsigned char currentScreen = LCD_UPPER_SCR;
+    unsigned char currentPosition = 50;
 
     while (TRUE) {
-    	/* Insert your queue usage stuff */
-    	/* You may also choose to do a quick poll of the Data Avail line
-    	 * of the encoder to convince yourself that the keypad encoder works.
-    	 */
+    	/* queue usage and LCD manipulation */
     	myLCD.Clear(LCD_BOTH_SCR);
     	myLCD.MoveCursor(currentScreen, currentPosition);
     	myLCD.PrintChar(currentScreen, cursor);
 
-    	char * message = (char *) OSQPend(&print_q, WAIT_FOREVER, &err);
+        char * message;
+        err = display_error ("Pending on Queue: ",
+            message = (char *) OSQPend(&print_q, WAIT_FOREVER, &err)
+        );
 
     	/* Decode message and change screen and position. */
     	changePosition(message, &currentScreen, &currentPosition);
@@ -85,12 +89,14 @@ void UserMain(void * pd) {
     }
 }
 
+/* change cursor position by reference according to a message (either L, R, U, or D) */
 void changePosition(char * message, unsigned char *currentScreen, unsigned char *currentPosition) {
 	switch (message[0])
 	{
 	case 'L':
 		iprintf("L");
 		if (*currentPosition == 0) {
+                        /* currently on top left corner of current screen */
 			toggleScreen(currentScreen);
 			*currentPosition = 79;
 		} else {
@@ -100,6 +106,7 @@ void changePosition(char * message, unsigned char *currentScreen, unsigned char 
 	case 'R':
 		iprintf("R");
 		if (*currentPosition == 79) {
+                        /* currently on top right corner of current screen */
 			toggleScreen(currentScreen);
 			*currentPosition = 0;
 		} else {
@@ -133,6 +140,7 @@ void changePosition(char * message, unsigned char *currentScreen, unsigned char 
 	iprintf("_%d", *currentPosition);
 }
 
+/* swap screen from upper to lower or vice versa */
 void toggleScreen(unsigned char *currentScreen) {
 	if (*currentScreen == LCD_UPPER_SCR) *currentScreen = LCD_LOWER_SCR;
 	else *currentScreen = LCD_UPPER_SCR;
@@ -150,6 +158,7 @@ void toggleScreen(unsigned char *currentScreen) {
 INTERRUPT(out_irq_pin_isr, 0x2500){
 	sim.eport.epfr=0x08; /* Clear the interrupt edge 0 0 0 0 1 0 0 0 */
 
+        /* Error printing omitted, since printing from ISR is ill advised. */
 	OSQPost(&print_q, (void *) myKeypad.GetNewButtonString());
 }
 /* The 8-bit interrupt vector is formed using the following algorithm:
