@@ -153,7 +153,6 @@ INTERRUPT(gra_isr, 0x2400) /* GRA Mask */
 INTERRUPT(irq1_isr, 0x2300) /* IRQ 1 Mask */
 {
 	sim.eport.epfr = 0x02; // 0000 0010 - Clear the interrupt edge
-
 	OSSemPost(&IrqPostSem);
 }
 

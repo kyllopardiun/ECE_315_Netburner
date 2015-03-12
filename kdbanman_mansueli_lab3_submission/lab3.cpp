@@ -116,9 +116,9 @@ void UserMain(void * pd) {
  */
 void StartGracefulStopTask(void) {
 	BYTE err = OS_NO_ERR;
-
-	OSSemInit(&IrqPostSem, NORESOURCES);
-
+    err = display_error ("Pending on the Semaphore: ",
+    		OSSemInit(&IrqPostSem, NORESOURCES)
+	);
 	/* start up the task that lights up LEDS */
 	err = display_error("StartGracefulStopTask", OSTaskCreatewName(	GraMain,
 					(void *)NULL,
@@ -138,8 +138,10 @@ void	GraMain( void * pd) {
 	char stopped = FALSE;
 
 	while (TRUE) {
-    	OSSemPend(&IrqPostSem, WAIT_FOREVER /* Wait forever */);
 
+	    err = display_error ("Pending on the Semaphore: ",
+	    		OSSemPend(&IrqPostSem, WAIT_FOREVER /* Wait forever */)
+		);
     	stopped = !stopped;
 
     	if (stopped) {
