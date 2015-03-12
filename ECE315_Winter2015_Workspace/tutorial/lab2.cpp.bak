@@ -77,10 +77,8 @@ void UserMain(void * pd) {
     	myLCD.MoveCursor(currentScreen, currentPosition);
     	myLCD.PrintChar(currentScreen, cursor);
 
-        char * message;
-        err = display_error ("Pending on Queue: ",
-            message = (char *) OSQPend(&print_q, WAIT_FOREVER, &err)
-        );
+        char * message = (char *) OSQPend(&print_q, WAIT_FOREVER, &err);
+        display_error ("Pending on Queue: ", err);
 
     	/* Decode message and change screen and position. */
     	changePosition(message, &currentScreen, &currentPosition);

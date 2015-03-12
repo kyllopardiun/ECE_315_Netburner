@@ -4,10 +4,10 @@
 const char * default_page="INDEX.HTM";
 
 const unsigned char FilePointer0[]={
-156, 62, 13, 10,138, 62, 13, 10, 84,104,101, 32,109, 97,105,
-110, 32,112, 97,103,101, 32,102,111,114, 32,116,104,101, 32,116,
-117,116,111,114,105, 97,108, 32,112,114,111,106,101, 99,116, 46,
- 13, 10,202, 62, 13, 10,220, 62, 13, 10,255,};
+156, 62, 10,138, 62, 10, 84,104,101, 32,109, 97,105,110, 32,
+112, 97,103,101, 32,102,111,114, 32,116,104,101, 32,116,117,116,
+111,114,105, 97,108, 32,112,114,111,106,101, 99,116, 46, 10,202,
+ 62, 10,220, 62, 10,255,};
 
 
 extern const HTML_FILE_RECORD file_record[1];
@@ -17,7 +17,7 @@ extern const unsigned  n_file_record;
 const unsigned  n_file_record=1;
 
 const HTML_FILE_RECORD file_record[1]={
-{"index.htm",FilePointer0,58,eHuffmanHtml,eTypeHtml},
+{"index.htm",FilePointer0,53,eHuffmanHtml,eTypeHtml},
 }; 
 
 
