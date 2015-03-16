@@ -40,7 +40,7 @@ and Nancy's keypad.
 
 /* Name:Keypad Constructor
  * Description: Constructor for the Keypad class. Not much to do beyond
- * initializing the only class
+ * initializing the only class ivar
  * Inputs: none
  * Outputs: none
  */

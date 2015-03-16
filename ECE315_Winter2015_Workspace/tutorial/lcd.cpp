@@ -272,7 +272,7 @@ Lcd::Lcd()
 }
 /**Name: setLCD
  * Description: sets the LCD as usual
- * Inputs: unsigned char screen should be one of LCD_UPPER_SCR, LCD_LOWER_SCR or LCD_BOTH_SCR
+ * Inputs: unsigned char screen should be one of LCD_UPPER_SCR, LCD_LOWER_SCR
  * or LCD_LOWER_SCR
  * Outputs: none
  */
