@@ -121,7 +121,11 @@
 #include <eTPU.h>
 #include <ETPUInit.h>
 #include <eTPU_sm.h>
-
+#define WAIT_FOREVER 0
+#define BUFFERSIZE 100
+#define USABLEBUFFERSIZE (100-1)
+#define SMALLBUFFERSIZE 3
+#define SMALLUSABLEBUFFERSIZE (3-1)
 extern "C"
 {
 }
@@ -129,11 +133,7 @@ extern "C"
 extern FormData myData;
 extern OS_SEM form_sem;
 
-/*-------------------------------------------------------------------
- * When you write a MyDoPost() function and register it, it will
- * be called when a web browser submits a Form POST. This is how
- * the data entered in the web page form gets to the device.
- *-----------------------------------------------------------------*/
+
 
 /* Name: MyDoPost
  * Description: This the handler for post requests that come into
@@ -147,25 +147,33 @@ extern OS_SEM form_sem;
  */
 int MyDoPost( int sock, char *url, char *pData, char *rxBuffer )
 {
+	OSSemPend(&form_sem, WAIT_FOREVER);
 	// Insert your post request handling here
 	iprintf("%s",pData);
-	char max[100];
-	char min[100];
-	char rotation[100];
-	char direction[3];
-	int result=ExtractPostData( "maxRPM", pData, max, 100 );
+	//initializes the arrays
+	char max[BUFFERSIZE];
+	char min[BUFFERSIZE];
+	char rotation[BUFFERSIZE];
+	char direction[SMALLBUFFERSIZE];
+	//memset those guys
+	memset(max,'\0',BUFFERSIZE);
+	memset(min,'\0',BUFFERSIZE);
+	memset(rotation,'\0',BUFFERSIZE);
+	memset(direction,'\0',SMALLBUFFERSIZE);
+	//do stuff
+	int result=ExtractPostData( "maxRPM", pData, max, USABLEBUFFERSIZE);
 	iprintf("\nmax:%s\n",max);
 	myData.SetMaxRPM(max);
-	result=ExtractPostData( "minRPM", pData, min, 100 );
+	result=ExtractPostData( "minRPM", pData, min, USABLEBUFFERSIZE);
 	iprintf("min:%s\n",min);
 	myData.SetMinRPM(min);
-	result=ExtractPostData( "rotations", pData, rotation, 100 );
+	result=ExtractPostData( "rotations", pData, rotation, USABLEBUFFERSIZE);
 	iprintf("rot:%s\n",rotation);
 	myData.SetRotations(rotation);
-	result=ExtractPostData( "direction", pData, direction, 2);
+	result=ExtractPostData( "direction", pData, direction, SMALLUSABLEBUFFERSIZE);
 	iprintf("direct:%s\n",direction);
 	myData.SetDirection(direction);
-
+	OSSemPost(&form_sem);
    // We have to respond to the post with a new HTML page...
    // In this case we will redirect so the browser will
    //go to that URL for the response...

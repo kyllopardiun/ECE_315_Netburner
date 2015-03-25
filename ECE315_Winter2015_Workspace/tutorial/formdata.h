@@ -38,6 +38,14 @@ public:
 	BYTE GetDirection(void);
 	BYTE GetMode(void);
 	BYTE Init(BYTE motor_mode);
+	char  isMaxValid(void);
+	char  isMinValid(void);
+	char  isModeValid(void);
+	char  isDirValid(void);
+	char  isRotationValid(void);
+	char  isStepsValid(void);
+	char  isValid(void);
+	char hasOnlyNumbers(char *string);
 private:
 	int  int_maxrpm;
 	int  int_minrpm;
