@@ -1,90 +1,83 @@
 <!DOCTYPE html>
-<HTML>
-<HEAD>
-<TITLE> ECE315 Lab #5 </TITLE>
+<html>
+<head>
+<title>ECE315 Lab #5</title>
 <meta name="description" content="Motor Webcontroller for Netburner">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8">
-<STYLE>
+<style>
 body {
 	font-family: 'Lucida Grande', 'Helvetica Neue', sans-serif;
 	background: #ccc; /* Old browsers */
 	/* Background created with Fireworks CS6, encoded with: 	http://www.base64-image.de/ */
 	background-image: url('data:image/png;base64,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');
-	background-repeat:repeat;
+	background-repeat: repeat;
 }
-
-
 h1 {
 	font-size: 60px;
 	text-align: center;
 	margin: 40px;
 	color: #000;
 }
-
 .wrap {
-	align:center;
+	align: center;
 	display: table;
-    width:60%;
-    margin:0 auto;
-
+	width: 60%;
+	margin: 0 auto;
 }
 .header {
-display:table-cell-group;
-border: 5px double;
-width:191%;
-padding: 20px;
--webkit-box-shadow: -7px -7px 16px 0px rgba(20, 72, 50, 0.75);
--moz-box-shadow:    -7px -7px 16px 0px rgba(20, 72, 50, 0.75);
-box-shadow:         -7px -7px 16px 0px rgba(20, 72, 50, 0.75);
+	display: table-cell-group;
+	border: 5px double;
+	width: 191%;
+	padding: 20px;
+	-webkit-box-shadow: -7px -7px 16px 0px rgba(20, 72, 50, 0.75);
+	-moz-box-shadow: -7px -7px 16px 0px rgba(20, 72, 50, 0.75);
+	box-shadow: -7px -7px 16px 0px rgba(20, 72, 50, 0.75);
 }
 .row {
-width:inherit;
-background:#ccc;
-min-height:200px;
-display: table-row;
-width: 100%;
+	width: inherit;
+	background: #ccc;
+	min-height: 200px;
+	display: table-row;
+	width: 100%;
 }
 .right-inner {
-display:table-cell;
-width:50%;
-background:#fff;
-border-bottom:thick #06C;
-border: solid rgba(119, 119, 119, 0.15) 20px;
-box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
--moz-box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
--webkit-box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
-
-
+	display: table-cell;
+	width: 50%;
+	background: #fff;
+	border-bottom: thick #06C;
+	border: solid rgba(119, 119, 119, 0.15) 20px;
+	box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
+	-moz-box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
+	-webkit-box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
 }
 .left-inner {
-display:table-cell;
-width:50%;
-background:#fff;
-border-bottom:thick #06C;
-border: solid rgba(119, 119, 119, 0.15) 20px;
-box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
--moz-box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
--webkit-box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
+	display: table-cell;
+	width: 50%;
+	background: #fff;
+	border-bottom: thick #06C;
+	border: solid rgba(119, 119, 119, 0.15) 20px;
+	box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
+	-moz-box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
+	-webkit-box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
 }
 .left {
-	float:left;
+	float: left;
 }
 .right {
-	float:right;
+	float: right;
 }
-
-.colour_zilla_blue{
-/* Generated by Colorzilla (http://www.colorzilla.com/gradient-editor/) */
-background: rgb(225,255,255); /* Old browsers */
-/* IE9 SVG, needs conditional override of 'filter' to 'none' */
-background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2UxZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjclIiBzdG9wLWNvbG9yPSIjZTFmZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTIlIiBzdG9wLWNvbG9yPSIjZTFmZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTIlIiBzdG9wLWNvbG9yPSIjZmRmZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMzAlIiBzdG9wLWNvbG9yPSIjZTZmOGZkIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNTQlIiBzdG9wLWNvbG9yPSIjYzhlZWZiIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNzUlIiBzdG9wLWNvbG9yPSIjYmVlNGY4IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2IxZDhmNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
-background: -moz-linear-gradient(top,  rgba(225,255,255,1) 0%, rgba(225,255,255,1) 7%, rgba(225,255,255,1) 12%, rgba(253,255,255,1) 12%, rgba(230,248,253,1) 30%, rgba(200,238,251,1) 54%, rgba(190,228,248,1) 75%, rgba(177,216,245,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(225,255,255,1)), color-stop(7%,rgba(225,255,255,1)), color-stop(12%,rgba(225,255,255,1)), color-stop(12%,rgba(253,255,255,1)), color-stop(30%,rgba(230,248,253,1)), color-stop(54%,rgba(200,238,251,1)), color-stop(75%,rgba(190,228,248,1)), color-stop(100%,rgba(177,216,245,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  rgba(225,255,255,1) 0%,rgba(225,255,255,1) 7%,rgba(225,255,255,1) 12%,rgba(253,255,255,1) 12%,rgba(230,248,253,1) 30%,rgba(200,238,251,1) 54%,rgba(190,228,248,1) 75%,rgba(177,216,245,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  rgba(225,255,255,1) 0%,rgba(225,255,255,1) 7%,rgba(225,255,255,1) 12%,rgba(253,255,255,1) 12%,rgba(230,248,253,1) 30%,rgba(200,238,251,1) 54%,rgba(190,228,248,1) 75%,rgba(177,216,245,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  rgba(225,255,255,1) 0%,rgba(225,255,255,1) 7%,rgba(225,255,255,1) 12%,rgba(253,255,255,1) 12%,rgba(230,248,253,1) 30%,rgba(200,238,251,1) 54%,rgba(190,228,248,1) 75%,rgba(177,216,245,1) 100%); /* IE10+ */
-background: linear-gradient(to bottom,  rgba(225,255,255,1) 0%,rgba(225,255,255,1) 7%,rgba(225,255,255,1) 12%,rgba(253,255,255,1) 12%,rgba(230,248,253,1) 30%,rgba(200,238,251,1) 54%,rgba(190,228,248,1) 75%,rgba(177,216,245,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1ffff', endColorstr='#b1d8f5',GradientType=0 ); /* IE6-8 */
+.colour_zilla_blue {
+	/* Generated by Colorzilla (http://www.colorzilla.com/gradient-editor/) */
+	background: rgb(225,255,255); /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2UxZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjclIiBzdG9wLWNvbG9yPSIjZTFmZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTIlIiBzdG9wLWNvbG9yPSIjZTFmZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTIlIiBzdG9wLWNvbG9yPSIjZmRmZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMzAlIiBzdG9wLWNvbG9yPSIjZTZmOGZkIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNTQlIiBzdG9wLWNvbG9yPSIjYzhlZWZiIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNzUlIiBzdG9wLWNvbG9yPSIjYmVlNGY4IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2IxZDhmNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+	background: -moz-linear-gradient(top, rgba(225,255,255,1) 0%, rgba(225,255,255,1) 7%, rgba(225,255,255,1) 12%, rgba(253,255,255,1) 12%, rgba(230,248,253,1) 30%, rgba(200,238,251,1) 54%, rgba(190,228,248,1) 75%, rgba(177,216,245,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(225,255,255,1)), color-stop(7%, rgba(225,255,255,1)), color-stop(12%, rgba(225,255,255,1)), color-stop(12%, rgba(253,255,255,1)), color-stop(30%, rgba(230,248,253,1)), color-stop(54%, rgba(200,238,251,1)), color-stop(75%, rgba(190,228,248,1)), color-stop(100%, rgba(177,216,245,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(225,255,255,1) 0%, rgba(225,255,255,1) 7%, rgba(225,255,255,1) 12%, rgba(253,255,255,1) 12%, rgba(230,248,253,1) 30%, rgba(200,238,251,1) 54%, rgba(190,228,248,1) 75%, rgba(177,216,245,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(225,255,255,1) 0%, rgba(225,255,255,1) 7%, rgba(225,255,255,1) 12%, rgba(253,255,255,1) 12%, rgba(230,248,253,1) 30%, rgba(200,238,251,1) 54%, rgba(190,228,248,1) 75%, rgba(177,216,245,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(225,255,255,1) 0%, rgba(225,255,255,1) 7%, rgba(225,255,255,1) 12%, rgba(253,255,255,1) 12%, rgba(230,248,253,1) 30%, rgba(200,238,251,1) 54%, rgba(190,228,248,1) 75%, rgba(177,216,245,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom, rgba(225,255,255,1) 0%, rgba(225,255,255,1) 7%, rgba(225,255,255,1) 12%, rgba(253,255,255,1) 12%, rgba(230,248,253,1) 30%, rgba(200,238,251,1) 54%, rgba(190,228,248,1) 75%, rgba(177,216,245,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1ffff', endColorstr='#b1d8f5', GradientType=0 ); /* IE6-8 */
 }
 .button {
 	/*Web Designer Wall (http://webdesignerwall.com/tutorials/css3-gradient-buttons)*/
@@ -96,7 +89,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1ffff', end
 	font: 14px/100% Arial, Helvetica, sans-serif;
 	padding: .5em 2em .55em;
 	text-shadow: 0 1px 1px rgba(0,0,0,.3);
-	-webkit-border-radius: .5em; 
+	-webkit-border-radius: .5em;
 	-moz-border-radius: .5em;
 	border-radius: .5em;
 	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
@@ -117,90 +110,96 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1ffff', end
 	border: solid 1px #333;
 	background: #333;
 	background: -webkit-gradient(linear, left top, left bottom, from(#666), to(#000));
-	background: -moz-linear-gradient(top,  #666,  #000);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#000000');
+	background: -moz-linear-gradient(top, #666, #000);
+ filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#000000');
 }
 .black:hover {
 	/*Web Designer Wall (http://www.webdesignerwall.com/demo/css-buttons.html)*/
 	background: #000;
 	background: -webkit-gradient(linear, left top, left bottom, from(#444), to(#000));
-	background: -moz-linear-gradient(top,  #444,  #000);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#000000');
+	background: -moz-linear-gradient(top, #444, #000);
+ filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#000000');
 }
 .black:active {
 	/*Web Designer Wall (http://www.webdesignerwall.com/demo/css-buttons.html)*/
 	color: #666;
 	background: -webkit-gradient(linear, left top, left bottom, from(#000), to(#444));
-	background: -moz-linear-gradient(top,  #000,  #444);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#666666');
+	background: -moz-linear-gradient(top, #000, #444);
+ filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#666666');
 }
 /*CSS Wall end*/
-.submit{
+.submit {
 	padding: 20px;
 	padding-left: 95px;
-	width:20%; 
-	margin:0 auto;	
+	width: 20%;
+	margin: 0 auto;
 }
-</STYLE>
-</HEAD>
-<BODY>
-<H1> WebMotor Controller </H1>
-<FORM ACTION="form.htm" METHOD=POST NAME="testform">
-	<div class="wrap">
-        <div class="header colour_zilla_blue">
-        	<h2><b>Motor Mode: <!--FUNCTIONCALL getMotorMode --><br/></b></h2>
-        </div>
-        <div class="row">
-        	<div class="left-inner">
-            	<div class="left">
-            		<p><b>Min. RPM:</b></p>
-					<p>1 <input name="minRPM"  type="range" min="1" max="200" step="1" /> 200</p>
-                </div>
-                <div class="right">
-					<!--FUNCTIONCALL outputMinRPM -->
-            	</div>
-            </div>
-            <div class="right-inner">
-            	<div class="left">
-            		<p><b>Max. RPM:</b></p>
-					<p>1 <input name="maxRPM" type="range" min="1" max="200" step="1" />  200</p>
-                </div>
-                <div class="right">
-					<!--FUNCTIONCALL outputMaxRPM -->
-            	</div>
-            </div>
-        </div>
-        <div class="row">
-        	<div class="right-inner">
-            	<div class="left">
-            		<p><b>Rotations:</b></p>
-					<p>1<input name="rotations" type="range" min="1" max="10000" step="10" /> 10000</p>
-                </div>
-                <div class="right">
-                	<!--FUNCTIONCALL outputRotation -->
-            	</div>
-            </div>
-            <div class="left-inner">
-            	<div class="left">
-            		<p><b>Direction:</b></p>
-					<select name="direction">
-						<option value="1">clockwise</option>
-						<option value="2">counter clock wise</option>
-					</select>
-                </div>
-                <div class="right">
-					<!--FUNCTIONCALL outputDirection -->
-            	</div>
-            </div>
-        </div>
+</style>
+</head>
+<body>
+<h1> WebMotor Controller </h1>
+<form action="form.htm" method=post name="testform">
+  <div class="wrap">
+    <div class="header colour_zilla_blue">
+      <h2><b>Motor Mode: <!--FUNCTIONCALL getMotorMode --><br/>
+        </b></h2>
     </div>
-    <div class="submit">
+    <div class="row">
+      <div class="left-inner">
+        <div class="left">
+          <p><b>Min. RPM:</b></p>
+          <p>1
+            <input name="minRPM"  type="range" min="1" max="200" step="1" />
+            200</p>
+        </div>
+        <div class="right"> 
+          <!--FUNCTIONCALL outputMinRPM --> 
+        </div>
+      </div>
+      <div class="right-inner">
+        <div class="left">
+          <p><b>Max. RPM:</b></p>
+          <p>1
+            <input name="maxRPM" type="range" min="1" max="200" step="1" />
+            200</p>
+        </div>
+        <div class="right"> 
+          <!--FUNCTIONCALL outputMaxRPM --> 
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="right-inner">
+        <div class="left">
+          <p><b>Rotations:</b></p>
+          <p>1
+            <input name="rotations" type="range" min="1" max="10000" step="10" />
+            10000</p>
+        </div>
+        <div class="right"> 
+          <!--FUNCTIONCALL outputRotation --> 
+        </div>
+      </div>
+      <div class="left-inner">
+        <div class="left">
+          <p><b>Direction:</b></p>
+          <select name="direction">
+            <option value="1">clockwise</option>
+            <option value="2">counter clock wise</option>
+          </select>
+        </div>
+        <div class="right"> 
+          <!--FUNCTIONCALL outputDirection --> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="submit"> 
     <!-- <input type="reset" class="button black" value="Stop Motor"> -->
- 	<input type="submit" class="button black" value="Submit Values" onClick="document.getElementById('function').value='output_me';" />
- 	<input type="submit" class="button black" value="Stop Me" onClick="document.getElementById('function').value='stop_me';" />
- 	<input type="hidden" class="button black" name="ECE315_form" id="function" value=""> 
-    </div>
-</FORM>
-</BODY>
-</HTML>
- 
+    <input type="submit" class="button black" value="Submit Values" onClick="document.getElementById('function').value='output_me';" />
+    <input type="submit" class="button black" value="Stop Me" onClick="document.getElementById('function').value='stop_me';" />
+    <input type="hidden" class="button black" name="ECE315_form" id="function" value="">
+  </div>
+</form>
+</body>
+</html>

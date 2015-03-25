@@ -37,7 +37,11 @@ FormData::~FormData() {
 	// No resources to clean
 }
 
-
+/* Name: SetMaxRPM
+ * Description: Sets the MaxRPM and verify if the input is acceptable
+ * Inputs:	 Raw string containing the value [char*]
+ * Outputs:  Whether the form is still OK or not [BYTE]
+ */
 BYTE FormData::SetMaxRPM(char * rpm) {
 	int max = atoi(rpm);
 	if ((max<=MAXRPM)&&(max>=MINRPM)&&(hasOnlyNumbers(rpm))){
@@ -48,11 +52,19 @@ BYTE FormData::SetMaxRPM(char * rpm) {
 	maxRPM_valid = FALSE;
 	return FORM_ERROR;
 }
-
+/* Name: GetMaxRPM
+ * Description: Gets the last valid value from
+ * Inputs:	 void
+ * Outputs:  The value of the field int
+ */
 int  FormData::GetMaxRPM(void){
 	return int_maxrpm;
 }
-
+/* Name: SetMinRPM
+ * Description: Sets the MinRPM and verify if the input is acceptable
+ * Inputs:	 Raw string containing the value [char*]
+ * Outputs:  Whether the form is still OK or not [BYTE]
+ */
 BYTE FormData::SetMinRPM(char * rpm) {
 	int min = atoi(rpm);
 	if ((min<=MAXRPM)&&(min>=MINRPM)&&(min<=int_maxrpm)&&hasOnlyNumbers(rpm)){
@@ -63,20 +75,37 @@ BYTE FormData::SetMinRPM(char * rpm) {
 	minRPM_valid = FALSE;
 	return FORM_ERROR;
 }
-
+/* Name: GetMinRPM
+ * Description: Gets the last valid value from
+ * Inputs:	 void
+ * Outputs:  The value of the field int
+ */
 int  FormData::GetMinRPM(void) {
 	return int_minrpm;
 }
 
+/* Name: SetSteps
+ * Description: Sets the Steps and verify if the input is acceptable
+ * Inputs:	Raw string containing the value [char*]
+ * Outputs:  Whether the form is still OK or not [BYTE]
+ */
 BYTE FormData::SetSteps(char * steps) {
 	steps_valid = TRUE;
 	return FORM_OK;
 }
-
+/* Name: GetSteps
+ * Description: Gets the last valid value from
+ * Inputs:	 void
+ * Outputs:  The value of the field int
+ */
 int FormData::GetSteps (void) {
 	return int_steps;
 }
-
+/* Name: SetRotations
+ * Description: Sets the Rotations and verify if the input is acceptable
+ * Inputs:	 Raw string containing the value [char*]
+ * Outputs:  Whether the form is still OK or not [BYTE]
+ */
 BYTE FormData::SetRotations(char * rot) {
 	int rotations = atoi(rot);
 	if ((rotations<=MAXROTATIONS)&&(rotations>=MINROTATIONS)&&hasOnlyNumbers(rot)){
@@ -87,11 +116,19 @@ BYTE FormData::SetRotations(char * rot) {
 	rotations_valid = FALSE;
 	return FORM_ERROR;
 }
-
+/* Name: GetRotations
+ * Description: Gets the last valid value from
+ * Inputs:	 void
+ * Outputs:  The value of the field int
+ */
 int  FormData::GetRotations(void){
 	return int_rotations;
 }
-
+/* Name: SetDirection
+ * Description: Sets the Direction and verify if the input is acceptable
+ * Inputs:	 Raw string containing the value [char*]
+ * Outputs:  Whether the form is still OK or not [BYTE]
+ */
 BYTE FormData::SetDirection(char * dir){
 	if (*dir=='2'){
 		direction = CW;
@@ -106,11 +143,19 @@ BYTE FormData::SetDirection(char * dir){
 		return FORM_ERROR;
 	}
 }
-
+/* Name: GetDirection
+ * Description: Gets the last valid value from
+ * Inputs:	 void
+ * Outputs:  The value of the field BYTE
+ */
 BYTE FormData::GetDirection(void){
 	return direction;
 }
-
+/* Name: GetMode
+ * Description: Gets the last valid value from
+ * Inputs:	 void
+ * Outputs:  The value of the field BYTE
+ */
 BYTE FormData::GetMode(void){
 	return mode;
 }
@@ -200,11 +245,11 @@ BYTE FormData::Init(BYTE motor_mode){
 	int_steps = 0; // Unused on this lab
 	int_rotations = DEFAULTROTATIONS;
 	//FLAGS
-	direction_valid = TRUE;
-	maxRPM_valid = TRUE;
-	minRPM_valid = TRUE;
-	rotations_valid = TRUE;
-	motor_mode_valid = TRUE;
-	steps_valid = TRUE;
+		direction_valid = TRUE;
+		maxRPM_valid = TRUE;
+		minRPM_valid = TRUE;
+		rotations_valid = TRUE;
+		motor_mode_valid = TRUE;
+		steps_valid = TRUE;
 	return FORM_OK;
 }
