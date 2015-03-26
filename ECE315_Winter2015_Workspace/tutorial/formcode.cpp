@@ -129,7 +129,7 @@
 extern "C"
 {
 }
-
+extern BYTE display_error(const char * info, BYTE error);
 extern FormData myData;
 extern OS_SEM form_sem;
 
@@ -147,7 +147,7 @@ extern OS_SEM form_sem;
  */
 int MyDoPost( int sock, char *url, char *pData, char *rxBuffer )
 {
-	OSSemPend(&form_sem, WAIT_FOREVER);
+	display_error("LCD::Init Error:", OSSemPend(&form_sem, WAIT_FOREVER));
 	// Insert your post request handling here
 	iprintf("%s",pData);
 	//initializes the arrays
@@ -173,7 +173,8 @@ int MyDoPost( int sock, char *url, char *pData, char *rxBuffer )
 	result=ExtractPostData( "direction", pData, direction, SMALLUSABLEBUFFERSIZE);
 	iprintf("direct:%s\n",direction);
 	myData.SetDirection(direction);
-	OSSemPost(&form_sem);
+	display_error("Formcode:MyDoPost error:", OSSemPost(&form_sem));
+
    // We have to respond to the post with a new HTML page...
    // In this case we will redirect so the browser will
    //go to that URL for the response...

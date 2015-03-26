@@ -40,11 +40,12 @@
 #include <cfinter.h>
 #include "motorconstants.h"
 #include "images.h"
+#define WITHRESOURCE 1
 #define MOTOR_MODE_FULL 0
 const char *AppName = "Kirby & Rodrigo";
 const char *ok = OK_IMAGE;
 char const *fail = FAIL_IMAGE;
-
+extern BYTE display_error(const char * info, BYTE error);
 extern "C"
 {
    void UserMain( void *pd );
@@ -73,13 +74,16 @@ OS_SEM form_sem;
 
 void UserMain( void *pd )
 {
+	BYTE err = OS_NO_ERR;
 	InitializeStack();
 	OSChangePrio( MAIN_PRIO );
 	EnableAutoUpdate();
 	StartHTTP();
 	EnableTaskMonitor();
 	iprintf("%s",AppName);
-	OSSemInit(&form_sem, 1);
+	err = display_error ("Pending on the Semaphore: ",
+		OSSemInit(&form_sem, WITHRESOURCE)
+	);
 	myData.Init(MOTOR_MODE_FULL);
 	//Call a registration function for our form code
 	// so POST requests are handled properly.
@@ -103,11 +107,11 @@ void UserMain( void *pd )
  */
 void outputMaxRPM(int sock, PCSTR url){
 	iprintf("\nvalidateMax");
-	OSSemPend(&form_sem, WAIT_FOREVER /* Wait forever */);
+	display_error("Lab4:outputMaxRPM error:", OSSemPend(&form_sem, WAIT_FOREVER /* Wait forever */));
 	if((sock > 0) && (url != NULL)) {
 			writestring(sock,(const char *) myData.isMaxValid() ? ok : fail);
 	}
-	OSSemPost(&form_sem);
+	display_error("Lab4:outputMaxRPM error:", OSSemPost(&form_sem));
 }
 /* Name: outputMinRPM
  * Description: Displays the image with an X or a checkmark.
@@ -119,12 +123,13 @@ void outputMaxRPM(int sock, PCSTR url){
  */
 void outputMinRPM(int sock, PCSTR url){
 	iprintf("min");
-	OSSemPend(&form_sem, WAIT_FOREVER /* Wait forever */);
+
+	display_error("Lab4:outputMinRPM error:", OSSemPend(&form_sem, WAIT_FOREVER /* Wait forever */));
 	iprintf("\nvalidateMin");
 	if((sock > 0) && (url != NULL)) {
 			writestring(sock,(const char *) myData.isMinValid() ? ok : fail);
 	}
-	OSSemPost(&form_sem);
+	display_error("Lab4:outputMinRPM error:", OSSemPost(&form_sem));
 	}
 /* Name: outputRotation
  * Description: Displays the image with an X or a checkmark.
@@ -136,11 +141,11 @@ void outputMinRPM(int sock, PCSTR url){
  */
 void outputRotation(int sock, PCSTR url){
 	iprintf("\nvalidateRot");
-	OSSemPend(&form_sem, WAIT_FOREVER /* Wait forever */);
+	display_error("Lab4:outputRot error:", OSSemPend(&form_sem, WAIT_FOREVER /* Wait forever */));
 	if((sock > 0) && (url != NULL)) {
 			writestring(sock,(const char *) myData.isRotationValid() ? ok : fail);
 	}
-	OSSemPost(&form_sem);
+	display_error("Lab4:outputRot error:", OSSemPost(&form_sem));
 	}
 /* Name: outputDirection
  * Description: Displays the image with an X or a checkmark.
@@ -152,11 +157,11 @@ void outputRotation(int sock, PCSTR url){
  */
 void outputDirection(int sock, PCSTR url){
 	iprintf("\nvalidateDir");
-	OSSemPend(&form_sem, WAIT_FOREVER /* Wait forever */);
+	display_error("Lab4:outputDir error:", OSSemPend(&form_sem, WAIT_FOREVER /* Wait forever */));
 	if((sock > 0) && (url != NULL)) {
 			writestring(sock,(const char *) myData.isDirValid() ? ok : fail);
 	}
-	OSSemPost(&form_sem);
+	display_error("Lab4:outputDir error:", OSSemPost(&form_sem));
 }
 /* Name: getMotorMode
  * Description: Displays the image with an X or a checkmark.
